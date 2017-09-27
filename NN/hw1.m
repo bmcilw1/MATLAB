@@ -34,8 +34,8 @@ disp('Final B ');
 disp(B);
 
 % (b) Also, verify your algorithm for any multi-neuron classification problem.
-P = { [0 1 1]' [1 0 1]' [1 1 0]' [0 0 0]' };
-T = { [0 1]' [1 0]' [1 1]' [0 0]' };
+P = { [3 5 2]' [3 6 5]' [4 5 3]' [4 6 1]' [6 2 2]' [6 3 3]' [7 2 5]' [7 3 4]'};
+T = { [0 1]'   [1 1]'   [0 1]'   [0 1]'   [0 0]'   [0 0]'   [0 0]'   [0 0]'};
 
 % Initialize correct size W and B array
 W = zeros([ size(cell2mat(T(1)),1) size(cell2mat(P(1)),1) ]);
