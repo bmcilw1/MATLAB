@@ -5,15 +5,15 @@
 % Assume there are R inputs and S neurons in the neural network.  
 % Verify the learning using data given below.
 
-P = { [1 4]' [1 5]' [2 4]' [2 5]' [3 1]' [3 2]' [4 1]' [4 2]'};
-T = {0 0 0 0 1 1 1 1};
+P = { [1 4]' [1 5]' [2 4]' [2 5]' [3 1]' [3 2]' [4 1]' [4 2]' };
+T = { 0 0 0 0 1 1 1 1 };
 
 % Create correct size W and B array
 W = zeros(size(cell2mat(P(1))));
 B = zeros(size(cell2mat(T(1))));
 
 % intialize training rate and max iterations
-alpha = .5;
+alpha = 1;
 maxiterations = 10000;
 
 % Begin algorythim
@@ -33,7 +33,7 @@ for epoc=1:maxiterations
     
     % if epoc was perfect, terminate loop
     if (~haserr)
-       fprintf('Network converges epoc = %i\n', i);
+       fprintf('Network converges epoc = %i\n', epoc);
        break; 
     end
 end
