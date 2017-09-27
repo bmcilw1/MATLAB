@@ -9,21 +9,21 @@ P = { [1 4]' [1 5]' [2 4]' [2 5]' [3 1]' [3 2]' [4 1]' [4 2]' };
 T = { 0 0 0 0 1 1 1 1 };
 
 % Initialize correct size W and B array
-W = zeros(size(cell2mat(P(1))));
+W = zeros([ size(cell2mat(T(1)),1) size(cell2mat(P(1)),1) ]);
 B = zeros(size(cell2mat(T(1))));
 
 % Intialize training rate and max epocs
 alpha = 1;
-maxEpocs = 10000;
+maxEpocs = 10;
 
 % Run Perceptron algorthym
 [W, B, epoc, converges] = my_perceptron(P, T, W, B, alpha, maxEpocs);
 
 % Display outputs
 if (converges)
-    fprintf('Network converges epoc = %i\n', epoc);
+    fprintf('Network a converges epoc = %i\n', epoc);
 else
-    fprintf('Network does not converge after %i epocs\n', maxEpocs); 
+    fprintf('Network a does not converge after %i epocs\n', maxEpocs); 
 end
 
 disp('Training rate (alpha) ');
@@ -34,3 +34,30 @@ disp('Final B ');
 disp(B);
 
 % (b) Also, verify your algorithm for any multi-neuron classification problem.
+P = { [0 1 1]' [1 0 1]' [1 1 0]' [0 0 0]' };
+T = { [0 1]' [1 0]' [1 1]' [0 0]' };
+
+% Initialize correct size W and B array
+W = zeros([ size(cell2mat(T(1)),1) size(cell2mat(P(1)),1) ]);
+B = zeros(size(cell2mat(T(1))));
+
+% Intialize training rate and max epocs
+alpha = 1;
+maxEpocs = 100;
+
+% Run Perceptron algorthym
+[W, B, epoc, converges] = my_perceptron(P, T, W, B, alpha, maxEpocs);
+
+% Display outputs
+if (converges)
+    fprintf('Network b converges epoc = %i\n', epoc);
+else
+    fprintf('Network b does not converge after %i epocs\n', maxEpocs); 
+end
+
+disp('Training rate (alpha) ');
+disp(alpha);
+disp('Final W ');
+disp(W);
+disp('Final B ');
+disp(B);

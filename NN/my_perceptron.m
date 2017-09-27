@@ -21,21 +21,21 @@ function [ W, B, epoc, converges ] = my_perceptron( P, T, W, B, alpha, maxEpocs 
         haserr = 0;
         for j=1:size(T,2)
             % Get initial input to hardlim
-            n = sum(W.*cell2mat(P(j)),1) + B;
+            mult = W' .* cell2mat(P(j));
+            n = B + sum(mult,1)';
             
             % Run hardlim and get claimed output
             a = my_hardlim(n);
             
             % Check error of our output compared to target output
-            Tj = cell2mat(T(j));
-            err = Tj - a;
+            err = cell2mat(T(j)) - a;
             
             % Is some error in the current output
             % OR has error prevously occured in this epoc?
-            haserr = haserr || any(err);
+            haserr = haserr || any(err(:));
             
             % Update weights and bias according to Perceptron algorthym
-            W = W + alpha * err * cell2mat(P(j));
+            W = W + alpha * err .* cell2mat(P(j))';
             B = B + alpha * err;
         end
 
