@@ -8,38 +8,22 @@
 P = { [1 4]' [1 5]' [2 4]' [2 5]' [3 1]' [3 2]' [4 1]' [4 2]' };
 T = { 0 0 0 0 1 1 1 1 };
 
-% Create correct size W and B array
+% Initialize correct size W and B array
 W = zeros(size(cell2mat(P(1))));
 B = zeros(size(cell2mat(T(1))));
 
-% intialize training rate and max iterations
+% Intialize training rate and max epocs
 alpha = 1;
-maxiterations = 10000;
+maxEpocs = 10000;
 
-% Begin algorythim
-err = zeros(size(cell2mat(T(1))));
-for epoc=1:maxiterations
-    % iterate over full array
-    haserr = 0;
-    for j=1:size(T,2)
-        n = sum(W.*cell2mat(P(j)),1) + B;
-        a = my_hardlim(n);
-        Tj = cell2mat(T(j));
-        err = Tj - a;
-        haserr = haserr || any(err);
-        W = W + alpha * err * cell2mat(P(j));
-        B = B + alpha * err;
-    end
-    
-    % if epoc was perfect, terminate loop
-    if (~haserr)
-       fprintf('Network converges epoc = %i\n', epoc);
-       break; 
-    end
-end
+% Run Perceptron algorthym
+[W, B, epoc, converges] = my_perceptron(P, T, W, B, alpha, maxEpocs);
 
-if (haserr)
-   fprintf('Network does not converge after %i epocs\n', maxiterations); 
+% Display outputs
+if (converges)
+    fprintf('Network converges epoc = %i\n', epoc);
+else
+    fprintf('Network does not converge after %i epocs\n', maxEpocs); 
 end
 
 disp('Final W ');
