@@ -26,6 +26,8 @@ else
     fprintf('Network does not converge after %i epocs\n', maxEpocs); 
 end
 
+disp('Training rate (alpha) ');
+disp(alpha);
 disp('Final W ');
 disp(W);
 disp('Final B ');
