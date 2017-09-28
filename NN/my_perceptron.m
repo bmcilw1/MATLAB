@@ -16,6 +16,19 @@ function [ W, B, epoc, converges ] = my_perceptron( P, T, W, B, alpha, maxEpocs 
     % Does not yet converge
     converges = 0;
     
+    % Auto detect if -1 / 1 or 0 / 1 is input
+    % If 0/1 use hardlim function
+    % If -1/1 use hardlims function
+    use_hardlims = 0;
+    for j=1:size(T,2)
+        Tj = cell2mat(T(j));
+        use_hardlims = use_hardlims || any(Tj(:) == -1);
+        
+        if (use_hardlims)
+            break;
+        end
+    end
+    
     for epoc=1:maxEpocs
         % iterate over full target cell array
         haserr = 0;
@@ -25,7 +38,11 @@ function [ W, B, epoc, converges ] = my_perceptron( P, T, W, B, alpha, maxEpocs 
             n = B + sum(mult,1)';
             
             % Run hardlim and get claimed output
-            a = my_hardlim(n);
+            if (use_hardlims)
+                a = my_hardlims(n);
+            else
+                a = my_hardlim(n);
+            end
             
             % Check error of our output compared to target output
             err = cell2mat(T(j)) - a;
