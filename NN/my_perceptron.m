@@ -1,8 +1,8 @@
 function [ W, B, epoc, converges ] = my_perceptron( P, T, W, B, alpha, maxEpocs )
 %MY_PERCEPTRON An implementation of the Perceptron Learning Algorthym
 % Inputs:
-%   P: Sample inputs (cell list)
-%   T: Targets to sample inputs P (cell list)
+%   P: Sample inputs (cell list), MUST be column vector
+%   T: Targets to sample inputs P (cell list), MUST be column vector
 %   W: Initial weight matrix (vector)
 %   B: Initial bias matrix (vector)
 %   alpha: Training rate (0 < alpha <= 1)
@@ -22,7 +22,7 @@ function [ W, B, epoc, converges ] = my_perceptron( P, T, W, B, alpha, maxEpocs 
     use_hardlims = 0;
     for j=1:size(T,2)
         Tj = cell2mat(T(j));
-        use_hardlims = use_hardlims || any(Tj(:) == -1);
+        use_hardlims = any(Tj(:) == -1);
         
         if (use_hardlims)
             break;

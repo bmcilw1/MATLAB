@@ -1,9 +1,13 @@
-% Brian McIlwian
-% Hw #1 Perceptron Learning
+% Group 1
+% Brian McIlwian, Justin Guillory, Marshall Simien, Mike Cole, Taj Chauvin 
+% Project #1 Perceptron Learning
 
 % (a) Write a program to implement perceptron learning algorithm. 
 % Assume there are R inputs and S neurons in the neural network.  
 % Verify the learning using data given below.
+
+% This implementation REQUIRES P and T to both be COLUMN vectors of any
+% length
 
 P = { [1 4]' [1 5]' [2 4]' [2 5]' [3 1]' [3 2]' [4 1]' [4 2]' };
 T = { 0 0 0 0 1 1 1 1 };
