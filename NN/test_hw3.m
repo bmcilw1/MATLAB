@@ -21,4 +21,5 @@ function [ successRecalls ] = test_hw3( W, p, maxNum, numFlips )
             successRecalls = successRecalls + 1 - err;
         end
     end
+    successRecalls = successRecalls / 10;
 end
