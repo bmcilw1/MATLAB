@@ -38,7 +38,7 @@ for maxNum = 2:7
 
     %Test network
     for numFlips = [2, 4, 6]
-        recallHebb = test_hw3( W, p, maxNum, numFlips );
-        fprintf('Hebb rule network has accuracy of %i%% for numbers 0-%i with %i noise flips.\n', recallHebb/(k*maxNum)*100, maxNum-1, numFlips);
+        recallHebb = test_hw3( WHebb, p, maxNum, numFlips );
+        fprintf('Hebb rule network has accuracy of %i%% for numbers 0-%i with %i noise flips.\n', recallHebb/(10*maxNum)*100, maxNum-1, numFlips);
     end
 end
