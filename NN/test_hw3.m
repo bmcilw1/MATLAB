@@ -1,4 +1,4 @@
-function [ successRecalls ] = test_hw3( W, p, maxNum, numFlips )
+function [ successRecalls, a ] = test_hw3( W, p, maxNum, numFlips )
 %test_hw3 Run tests on given network
     % initilize num
     successRecalls = 0;
