@@ -78,7 +78,7 @@ end
 
 I = 1:6;
 
-figure;
+figure('name', 'Part I and II - Reconizing Numbers');
 
 subplot(1,3,1);
 plot(I, R(1, :, 1), '-o', I, R(1, :, 2), '-o');
