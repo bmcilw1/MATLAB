@@ -2,7 +2,7 @@ function [ R ] = run_hw3(p)
 %test_hw3 Run tests on given network
     numFlips = [2, 4, 6];
     R = ones(3, 6, 2);
-    for maxNum = 2:7
+    for maxNum = 2:size(p,2)
         % Will go from 0 to maxNum - 1
         % Hebb rule W: sum of all PnPn'
         WHebb = zeros(30,30);
