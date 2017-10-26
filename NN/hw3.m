@@ -135,36 +135,35 @@ p(:,5) = F(:);
 
 % Test intitials
 R = run_hw3(p);
-
-I = 1:6;
+I = 2:5;
 figure('name', 'Part III - Reconizing Initials');
 
 subplot(1,3,1);
 plot(I, R(1, :, 1), '-o', I, R(1, :, 2), '-o');
 title('2 Noise Bits')
-xlabel('Max Number')
+xlabel('Number of Inputs')
 set(gca,'xtick',1:6)
 ylabel('% Accuracy')
-ylim([0 100])
+ylim([20 100])
 grid on
 legend('Hebb', 'Psuedo')
 
 subplot(1,3,2);
 plot(I,R(2,:,1), '-o', I, R(2,:,2), '-o');
 title('4 Noise Bits')
-xlabel('Max Number')
+xlabel('Number of Inputs')
 set(gca,'xtick',1:6)
 ylabel('% Accuracy')
-ylim([0 100])
+ylim([20 100])
 grid on
 legend('Hebb', 'Psuedo')
 
 subplot(1,3,3);
 plot(I,R(3,:,1), '-o', I, R(3,:,2), '-o');
 title('6 Noise Bits')
-xlabel('Max Number')
+xlabel('Number of Inputs')
 set(gca,'xtick',1:6)
 ylabel('% Accuracy')
-ylim([0 100])
+ylim([20 100])
 grid on
 legend('Hebb', 'Psuedo')
