@@ -18,7 +18,6 @@ function [ R ] = run_hw3(p)
             recallSu = test_hw3( WSu, p, maxNum, numFlips(i));
             R(i,maxNum-1, 1) = recallHebb/maxNum*100;
             R(i,maxNum-1, 2) = recallSu/maxNum*100;
-            %fprintf('Hebb rule network has accuracy of %i%% for numbers 0-%i with %i noise flips.\n', H(i,maxNum-1), maxNum-1, numFlips(i));
         end
     end
 end

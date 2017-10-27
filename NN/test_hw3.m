@@ -17,8 +17,10 @@ function [ successRecalls, a ] = test_hw3( W, p, maxNum, numFlips )
 
         for i=1:maxNum
             a = my_hardlims(W*Test(:,i));
-            err = any(a-p(:,i) ~= 0);
-            successRecalls = successRecalls + 1 - err;
+            
+            if (~any(a-p(:,i) ~= 0))
+                successRecalls = successRecalls + 1;
+            end
         end
     end
     successRecalls = successRecalls / 10;
