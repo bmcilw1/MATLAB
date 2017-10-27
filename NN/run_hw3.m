@@ -6,11 +6,11 @@ function [ R ] = run_hw3(p)
         % Will go from 0 to maxNum - 1
         % Hebb rule W: sum of all PnPn'
         WHebb = zeros(30,30);
-        WSu = zeros(30,30);
         for i=1:maxNum
             WHebb = WHebb + p(:,i)*p(:,i)';
-            WSu = WSu + p(:,i)*inv(p(:,i)'*p(:,i))*p(:,i)';
         end
+        
+        WSu = p(:,1:maxNum)*inv(p(:,1:maxNum)'*p(:,1:maxNum))*p(:,1:maxNum)';
 
         %Test network
         for i = 1:3
