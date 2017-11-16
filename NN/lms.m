@@ -1,4 +1,4 @@
-function [ W, e, r ] = lms( v, s, m, alpha)
+function [ W, e, r, X, Y ] = lms( v, s, m, alpha)
 %LMS Implementation of LMS algorythim for 2 input ADALINE
     % v - raw input noise near noise source
     % s - pure input signal
@@ -11,6 +11,8 @@ function [ W, e, r ] = lms( v, s, m, alpha)
     e=zeros(1,i);
     a=zeros(1,i);
     r=zeros(1,i);
+    X=zeros(1,i);
+    Y=zeros(1,i);
 
     for k = 1:i
         % Handle special case k = 1
@@ -29,5 +31,8 @@ function [ W, e, r ] = lms( v, s, m, alpha)
         else
             W = W + 2*alpha*e(k)*[v(k) v(k-1)]; % update weight
         end
+        
+        X(k) = W(1);
+        Y(k) = W(2);
     end
 end
