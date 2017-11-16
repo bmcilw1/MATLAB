@@ -34,3 +34,32 @@ for k = 2:i
     Y(k) = W(2);
     W = W + 2*alpha*e(k)*[v(k) v(k-1)];
 end
+
+W
+subplot(3,1,1);
+
+plot(s, '- red');
+
+hold on;
+plot(r, '-- green');
+title('Original and restored signal (alpha=0.12)');
+subplot(3,1,2);
+plot(e,'blue');
+title('Original minus restored signal');
+
+%% Countor Plot
+r=[.72 -.36; -.36 .72];
+h=[0; -.06235];
+[x,y] = meshgrid(-2:.1:2,-2:.1:3);
+[j,k]=size(x);
+z=zeros(j,k);
+for m=1:j
+    for n=1:k
+        z(m,n) = 1.4-2*[x(m,n);y(m,n)]'*h+([x(m,n);y(m,n)]'*r)*[x(m,n);y(m,n)];
+    end
+end
+subplot(3,1,3);
+contour(x,y,z);
+hold on;
+plot(X,Y);
+title('Contour plot');
