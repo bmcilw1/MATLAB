@@ -4,20 +4,20 @@
 
 % LMS
 i=80; %time
-v=zeros(1,i); % input noise
-m=zeros(1,i); % actual noise vector
-s=zeros(1,i); % input pure signal
+s=zeros(1,i); % pure input signal
+v=zeros(1,i); % raw input noise near noise source
+m=zeros(1,i); % percieved noise near input signal
 
 for k = 1:i
-    m(k) = .12*sin(2*pi*k/3+pi/2); % Actual noise
-    v(k) = 1.2*sin(2*k*pi/3); % Noise vector
-    s(k) = -2 + 4*rand(); % signal
+    s(k) = -2 + 4*rand();
+    v(k) = 1.2*sin(2*k*pi/3);
+    m(k) = .12*sin(2*pi*k/3+pi/2);
 end
 
-alpha = 0.12; % Given in problem
-e_limit = 10^-3; % Given
+alpha = 0.12; % Learning rate, given in problem
+e_limit = 10^-3; % Given TODO: how to use this??
 
-[ W, e, r ] = lms( v, s, m, alpha, e_limit);
+[ W, e, r ] = lms( v, s, m, alpha);
 
 W
 subplot(3,1,1);
