@@ -15,9 +15,7 @@ disp('Start speaking.')
 recordblocking(recorder1, 5);
 disp('End of Recording. Playing Back')
 play(recorder1);
-y = getaudiodata(recorder1);
-title('Audio Recording');
-plot(y);
+sound = getaudiodata(recorder1);
 
 for k = 1:i
     s(k) = -2 + 4*rand();
@@ -66,3 +64,8 @@ contour(x,y,z);
 hold on;
 plot(X,Y);
 title('Contour plot');
+
+figure;
+i = linspace(0, 5, 44100*5);
+title('Audio Recording');
+plot(i, sound);
