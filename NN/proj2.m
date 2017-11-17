@@ -42,40 +42,9 @@ alpha = .12
 
 e_limit = 10^-3; % Given TODO: how to use this??
 
-[ W, e, R, X, Y] = lms( v, s, m, alpha);
-
+[ W, e, r, X, Y] = lms( v, s, m, alpha);
 W
-subplot(3,1,1);
-
-plot(s, '- red');
-
-hold on;
-plot(R, '-- red');
-title(['Original and restored signal, alpha = ' num2str(alpha)]);
-subplot(3,1,2);
-plot(e,'blue');
-title(['Original minus restored signal, alpha = ' num2str(alpha)]);
-
-%% Countor Plot
-R=cov(v,v_kMinus1); % correct
-%R=[.72 -.36; -.36 .72];
-h=[mean((s+m).*v) mean((s+m).*v_kMinus1)]'; % correct
-%h=[0; -.06234];
-c=mean((s+m).^2); % correct
-%c=.0205;
-[x,y] = meshgrid(-1:.01:1,-1:.01:1);
-[j,k]=size(x);
-z=zeros(j,k);
-for m=1:j
-    for n=1:k
-        z(m,n) = c-2*[x(m,n);y(m,n)]'*h+[x(m,n);y(m,n)]'*R*[x(m,n);y(m,n)];
-    end
-end
-subplot(3,1,3);
-contour(x,y,z);
-hold on;
-plot(X,Y);
-title('Contour plot');
+plot_lms(v, vMinus1, s, m, alpha, e, r, X, Y);
 
 figure;
 i = linspace(0, 5, 44100*5);
