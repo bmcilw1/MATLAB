@@ -8,13 +8,24 @@ s=zeros(1,i); % pure input signal
 v=zeros(1,i); % raw input noise near noise source
 m=zeros(1,i); % percieved noise near input signal
 
+x = inputdlg('Enter a training rate (alpha)');% Learning rate, given in problem
+recorder1 = audiorecorder(44100,16,1);
+disp('Start speaking.')
+recordblocking(recorder1, 5);
+disp('End of Recording. Playing Back')
+play(recorder1);
+y = getaudiodata(recorder1);
+title('Audio Recording');
+plot(y);
+
 for k = 1:i
     s(k) = -2 + 4*rand();
     v(k) = 1.2*sin(2*pi*k/3);
     m(k) = .12*sin(2*pi*k/3+pi/2);
 end
 
-alpha = 0.12; % Learning rate, given in problem
+alpha = str2double(x{:});
+
 e_limit = 10^-3; % Given TODO: how to use this??
 
 [ W, e, R, X, Y] = lms( v, s, m, alpha);
@@ -25,11 +36,11 @@ subplot(3,1,1);
 plot(s, '- red');
 
 hold on;
-plot(R, '-- green');
-title('Original and restored signal (alpha=0.12)');
+plot(R, '-- red');
+title(['Original and restored signal, alpha = ' num2str(alpha)]);
 subplot(3,1,2);
 plot(e,'blue');
-title('Original minus restored signal');
+title(['Original minus restored signal, alpha = ' num2str(alpha)]);
 
 %% Countor Plot
 R=[.72 -.36; -.36 .72];
