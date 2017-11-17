@@ -7,6 +7,7 @@ i=80; %time
 s=zeros(1,i); % pure input signal
 v=zeros(1,i); % raw input noise near noise source
 m=zeros(1,i); % percieved noise near input signal
+v_kMinus1 = v;
 
 x = inputdlg('Enter a training rate (alpha)');% Learning rate, given in problem
 recorder1 = audiorecorder(44100,16,1);
@@ -21,6 +22,9 @@ plot(y);
 for k = 1:i
     s(k) = -2 + 4*rand();
     v(k) = 1.2*sin(2*pi*k/3);
+    if (k > 1)
+        v_kMinus1(k) = v(k-1);
+    end
     m(k) = .12*sin(2*pi*k/3+pi/2);
 end
 
@@ -44,6 +48,9 @@ title(['Original minus restored signal, alpha = ' num2str(alpha)]);
 
 %% Countor Plot
 R=[.72 -.36; -.36 .72];
+%R=cov(v,v_kMinus1);
+%h = xcorr([(s+m) (s+m)]', [v v_kMinus1]')
+%h=[mean((s+m)'*v) mean((s+m)'*v_kMinus1)]'
 h=[0; -.06234];
 c=.0205;
 [x,y] = meshgrid(-1:.01:1,-1:.01:1);
