@@ -17,13 +17,25 @@ disp('End of Recording. Playing Back')
 play(recorder1);
 sound = getaudiodata(recorder1);
 %}
+
+SKin = input('Give an equation for s(k): ')
+VKin = input('Give an equation for v(k): ')
+MKin = input('Give an equation for m(k): ')
+
+SK = SKin;
+VK = VKin;
+
+
 for k = 1:i
-    s(k) = -.2 + .4*rand();
-    v(k) = 1.2*sin(2*pi*k/3);
+    s(k) = SK  ;
+%     s(k) = -.2 + .4*rand();
+    v(k) = VK;
+%     v(k) = 1.2*sin(2*pi*k/3);
     if (k > 1)
         v_kMinus1(k) = v(k-1);
     end
-    m(k) = .12*sin(2*pi*k/3+pi/2);
+    m(k) = MK;
+%     m(k) = .12*sin(2*pi*k/3+pi/2);
 end
 alpha = .12
 %alpha = str2double(x{:});
