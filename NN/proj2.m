@@ -48,14 +48,11 @@ W=[0 0]; % Initial weights
 
 for k = 1:i
     s(k) = eval(SK);
-%     s(k) = -.2 + .4*rand();
     v(k) = eval(VK);
-%     v(k) = 1.2*sin(2*pi*k/3);
     if (k > 1)
         v_kMinus1(k) = v(k-1);
     end
     m(k) = eval(MK);
-%     m(k) = .12*sin(2*pi*k/3+pi/2);
 end
 
 for k=1:epoc_limit
@@ -74,11 +71,13 @@ end
 W
 plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y);
 
-figure;
-i = linspace(0, 5, 44100*5);
-title('Audio Recording');
-    btn = uicontrol('Style', 'pushbutton', 'String', 'Play',...
-        'Position', [20 20 50 20],...
-        'Callback', 'play(recObj)');
-soundVect = getaudiodata(recObj); 
-plot(soundVect);
+if recordSelection == 1
+    figure;
+    i = linspace(0, 5, 44100*5);
+    title('Audio Recording');
+        btn = uicontrol('Style', 'pushbutton', 'String', 'Play',...
+            'Position', [20 20 50 20],...
+            'Callback', 'play(recObj)');
+    soundVect = getaudiodata(recObj); 
+    plot(soundVect);
+end
