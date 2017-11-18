@@ -6,10 +6,9 @@
 
 recordSelection = recordDialog();
 
-switch recordSelection
-    case 1
-        sound = record(44100,16,5);
-    case 0 
+if recordSelection == 1
+    recObj = record(44100, 16, 2);
+    recordblocking(recObj, 3) % take 3 seconds of input
 end
 
 prompt = {'Give an equation for s(k): ', ...
@@ -21,7 +20,7 @@ prompt = {'Give an equation for s(k): ', ...
     'Give number of samples: '};
 dlg_title = 'Input';
 num_lines = 1;
-defaultans = {'-.2 + .4*rand()', ...
+defaultans = {'-2 + 4*rand()', ...
     '1.2*sin(2*pi*k/3)', ...
     '.12*sin(2*pi*k/3+pi/2)', ...
     '.12', ...
@@ -80,5 +79,6 @@ i = linspace(0, 5, 44100*5);
 title('Audio Recording');
     btn = uicontrol('Style', 'pushbutton', 'String', 'Play',...
         'Position', [20 20 50 20],...
-        'Callback', 'play');
-plot(i, sound);
+        'Callback', 'play(recObj)');
+soundVect = getaudiodata(recObj); 
+plot(soundVect);
