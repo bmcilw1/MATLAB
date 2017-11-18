@@ -3,19 +3,14 @@
 % Project 2
 
 % LMS
-i=80; %time
-s=zeros(1,i); % pure input signal
-v=zeros(1,i); % raw input noise near noise source
-m=zeros(1,i); % percieved noise near input signal
-v_kMinus1 = v;
-W=[0 0]; % Initial weights
 
 prompt = {'Give an equation for s(k): ', ...
     'Give an equation for v(k): ', ...
     'Give an equation for m(k): ', ...
     'Give training rate alpha: ', ...
     'Give acceptable error threshold: ', ...
-    'Give max epocs: '};
+    'Give max epocs: ', ... 
+    'Give number of samples: '};
 dlg_title = 'Input';
 num_lines = 1;
 defaultans = {'-.2 + .4*rand()', ...
@@ -23,7 +18,8 @@ defaultans = {'-.2 + .4*rand()', ...
     '.12*sin(2*pi*k/3+pi/2)', ...
     '.12', ...
     '10^-3', ...
-    '10^3'};
+    '10^3', ...
+    '800'};
 answer = inputdlg(prompt,dlg_title,num_lines,defaultans);
 
 SK = answer{1,1};
@@ -35,6 +31,13 @@ e_limit = answer{5,1};
 e_limit = eval(e_limit);
 epoc_limit = answer{6,1};
 epoc_limit = eval(epoc_limit);
+i = eval(answer{7,1}); %time
+
+s=zeros(1,i); % pure input signal
+v=zeros(1,i); % raw input noise near noise source
+m=zeros(1,i); % percieved noise near input signal
+v_kMinus1 = v;
+W=[0 0]; % Initial weights
 
 for k = 1:i
     s(k) = eval(SK);
@@ -67,4 +70,7 @@ plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y);
 figure;
 i = linspace(0, 5, 44100*5);
 title('Audio Recording');
+    btn = uicontrol('Style', 'pushbutton', 'String', 'Play',...
+        'Position', [20 20 50 20],...
+        'Callback', 'play');
 plot(i, sound);
