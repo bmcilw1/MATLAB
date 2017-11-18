@@ -17,17 +17,17 @@ function [] = plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y)
 
     hold on;
     plot(r, '-- blue');
-    title(['Original and restored signal, alpha = ' num2str(alpha)]);
+    title(['Original (red) and restored signal (blue), alpha = ' num2str(alpha)]);
     subplot(3,1,2);
     plot(e,'blue');
-    title(['Original minus restored signal, alpha = ' num2str(alpha)]);
+    title(['Original minus restored signal (overall error), alpha = ' num2str(alpha)]);
 
     %% Countor Plot
     R=cov(v,v_kMinus1) % correct
     h=[mean((s+m).*v) mean((s+m).*v_kMinus1)]' % correct
     c=mean((s+m).^2) % correct
     
-    xStar=inv(R)*h
+    xStar=R^-1*h
 
     [x,y] = meshgrid(-2:.01:2,-2:.01:2);
     [j,k]=size(x);
@@ -42,7 +42,6 @@ function [] = plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y)
     subplot(3,1,3);
     contour(x,y,z);
     hold on;
-    plot(X,Y);
-    title('Contour plot');
-
+    plot(X,Y, '-o');
+    title('Contour plot of W over time');
 end
