@@ -3,7 +3,7 @@
 % Project 2
 
 % LMS
-i=80000; %time
+i=80; %time
 s=zeros(1,i); % pure input signal
 v=zeros(1,i); % raw input noise near noise source
 m=zeros(1,i); % percieved noise near input signal
@@ -18,7 +18,7 @@ play(recorder1);
 sound = getaudiodata(recorder1);
 %}
 for k = 1:i
-    s(k) = -.2 + .4*rand();
+    s(k) = -2 + 4*rand();
     v(k) = 1.2*sin(2*pi*k/3);
     if (k > 1)
         v_kMinus1(k) = v(k-1);
@@ -32,7 +32,7 @@ e_limit = 10^-3; % Given TODO: how to use this??
 
 [ W, e, r, X, Y] = lms( v, s, m, alpha);
 W
-plot_lms(v, vMinus1, s, m, alpha, e, r, X, Y);
+plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y);
 
 figure;
 i = linspace(0, 5, 44100*5);
