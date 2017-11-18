@@ -8,6 +8,7 @@ s=zeros(1,i); % pure input signal
 v=zeros(1,i); % raw input noise near noise source
 m=zeros(1,i); % percieved noise near input signal
 v_kMinus1 = v;
+W=[0 0]; % Initial weights
 %{
 x = inputdlg('Enter a training rate (alpha)');% Learning rate, given in problem
 recorder1 = audiorecorder(44100,16,1);
@@ -41,9 +42,22 @@ end
 alpha = .12
 %alpha = str2double(x{:});
 
-e_limit = 10^-3; % Given TODO: how to use this??
+e_limit = 10^-3;
+epoc_limit = 10^3;
 
-[ W, e, r, X, Y] = lms( v, s, m, alpha);
+for k=1:epoc_limit
+    % Run lms algorythm
+    [ W, e, r, X, Y] = lms( v, s, m, alpha, W);
+    
+    % Compute error
+    error = norm(e);
+    
+    % If error under error limit terminate epocs
+    if (error < e_limit)
+        break;
+    end
+end
+
 W
 plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y);
 

@@ -1,4 +1,4 @@
-function [ W, e, r, X, Y ] = lms( v, s, m, alpha)
+function [ W, e, r, X, Y ] = lms( v, s, m, alpha, W)
 %LMS Implementation of LMS algorythim for 2 input ADALINE
     % v - raw input noise near noise source
     % s - pure input signal
@@ -7,7 +7,6 @@ function [ W, e, r, X, Y ] = lms( v, s, m, alpha)
     % e_limit - epoc limit for acceptable error
     
     i = size(s,2); % length of input vector
-    W=[0 0];
     e=zeros(1,i);
     a=zeros(1,i);
     r=zeros(1,i);
