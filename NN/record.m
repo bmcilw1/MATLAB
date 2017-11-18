@@ -1,6 +1,6 @@
-function [ recorder1 ] = record( sampleRate, bitDepth, length )
+function [ recorder1 ] = record( sampleRate, bitDepth, length, message)
 %RECORD creates an audio recording 
-    h = waitbar(0,'Recorder...');
+    h = waitbar(0,message);
     steps = 1000;
     for step = 1:steps
         % computations take place here

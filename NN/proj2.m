@@ -8,7 +8,8 @@ recordSelection = recordDialog();
 
 %if the user wants to record
 if recordSelection == 1
-    recObj = record(44100, 16, 2, 5, 'Recording');
+    recObjSK = record(44100, 16, 5, 'Recording s(k)');
+    recObjVK = record(44100, 16, 5, 'Recording v(k)');
     answer = recordParameters();
 else
     answer = parameterDialog();
