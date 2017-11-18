@@ -7,8 +7,7 @@
 recordSelection = recordDialog();
 
 if recordSelection == 1
-    recObj = record(44100, 16, 2);
-    recordblocking(recObj, 3) % take 3 seconds of input
+    recObj = record(44100, 16, 2, 5);
 end
 
 prompt = {'Give an equation for s(k): ', ...
