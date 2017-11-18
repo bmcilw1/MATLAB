@@ -55,6 +55,10 @@ for k = 1:i
     m(k) = eval(MK);
 end
 
+diaryName = 'outputProj2.out';
+diary(diaryName);
+diary on;
+
 for k=1:epoc_limit
     % Run lms algorythm
     [ W, e, r, X, Y] = lms( v, s, m, alpha, W);
@@ -81,3 +85,25 @@ if recordSelection == 1
     soundVect = getaudiodata(recObj); 
     plot(soundVect);
 end
+
+diary off;
+output=fileread(diaryName);
+% show output to user
+%msgbox(output, 'Program Output')
+
+S.fh = figure('units','pixels',...
+              'position',[100 100 400 400],...
+              'menubar','none',...
+              'resize','on',...
+              'numbertitle','off',...
+              'name','Program output');
+S.tx = uicontrol('style','edit',...
+                 'units','pix',...
+                 'position',[10 10 390 390],...
+                 'backgroundcolor','w',...
+                 'HorizontalAlign','left',...
+                 'min',5,'max',10,...
+                 'enable','inactive');
+
+set(S.tx,'string',cat(1,get(S.tx,'string'),{output}))
+delete(diaryName); % cleanup
