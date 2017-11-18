@@ -4,6 +4,14 @@
 
 % LMS
 
+recordSelection = recordDialog();
+
+switch recordSelection
+    case 1
+        sound = record(44100,16,5);
+    case 0 
+end
+
 prompt = {'Give an equation for s(k): ', ...
     'Give an equation for v(k): ', ...
     'Give an equation for m(k): ', ...
