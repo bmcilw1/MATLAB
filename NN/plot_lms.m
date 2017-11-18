@@ -16,7 +16,7 @@ function [] = plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y)
     plot(s, '- red');
 
     hold on;
-    plot(r, '-- red');
+    plot(r, '-- blue');
     title(['Original and restored signal, alpha = ' num2str(alpha)]);
     subplot(3,1,2);
     plot(e,'blue');
@@ -26,6 +26,8 @@ function [] = plot_lms(v, v_kMinus1, s, m, alpha, e, r, X, Y)
     R=cov(v,v_kMinus1) % correct
     h=[mean((s+m).*v) mean((s+m).*v_kMinus1)]' % correct
     c=mean((s+m).^2) % correct
+    
+    xStar=inv(R)*h
 
     [x,y] = meshgrid(-2:.01:2,-2:.01:2);
     [j,k]=size(x);
