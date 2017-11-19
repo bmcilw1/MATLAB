@@ -6,12 +6,12 @@ function [ W, e, r, X, Y ] = lms( v, s, m, alpha, W)
     % alpha - learning rate
     % e_limit - epoc limit for acceptable error
     
-    i = size(s,2); % length of input vector
-    e=zeros(1,i);
-    a=zeros(1,i);
-    r=zeros(1,i);
-    X=zeros(1,i);
-    Y=zeros(1,i);
+    i = size(s,1); % length of input vector
+    e=zeros(i,1);
+    a=zeros(i,1);
+    r=zeros(i,1);
+    X=zeros(i,1);
+    Y=zeros(i,1);
 
     for k = 1:i
         % Handle special case k = 1
