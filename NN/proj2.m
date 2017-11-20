@@ -97,6 +97,12 @@ if recordSelection == 1
                'Callback','playback(r)');
 end
 
+% Comment on why the restored signal is not exactly same as the original signal.
+why=['Due to the LMS algorithm use of an approximated gradient to' ...
+    ' calculate the maximum stable learning rate, this system is based' ...
+    ' on an estimate of the true gradient. This leads to the restored' ...
+    ' signal not exactly matching the original signal.']
+
 % Get output for display
 diary off;
 output=fileread(diaryName);
